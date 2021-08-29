@@ -96,42 +96,67 @@ class MidiInputHandler(object):
             formatted_message += "{}, {}".format(*message[1:])
         self._window[config.MIDI_RECEIVE_KEY].update(formatted_message)
 
-    def update_cue(self):
-        pass
+    def update_cue(self, midi_note: int):
+        spin = self._window[config.CUE_KEY]
+        current_value = spin.get()
+        if midi_note == config.PREVIOUS_CUE_MIDI_NOTE:
+            new_value = current_value - 1
+        else:
+            new_value = current_value + 1
+
+        if new_value > spin.Values[-1]:
+            new_value = spin.Values[0]
+        elif new_value < spin.Values[0]:
+            new_value = spin.Values[-1]
+
+        self._set_active_cue(new_value)
+        spin.update(new_value)
 
     def get_midi_channel(self) -> int:
         return min(self._midi_channels, key=lambda channel: channel.occupation_time)
 
+    def occupy_midi_channel(self, message: typing.List[int], message_type: int):
+        """Send midi message to engine."""
+
+        active_cue = self._get_active_cue()
+
+        try:
+            data = active_cue[message[1]]
+        except KeyError:
+            data = None
+
+        if data is not None:
+            midi_pitch, pitch_bend, engine_id = data
+            engine = self._engines[engine_id]
+            midi_channel = self.get_midi_channel()
+            midi_channel.occupy(message[1], midi_pitch, engine._midi_out)
+            engine.send_message(
+                [
+                    midiconstants.PITCH_BEND | midi_channel,
+                    pitch_bend & 0x7F,
+                    (pitch_bend >> 7) & 0x7F,
+                ]
+            )
+            engine.send_message([message_type | midi_channel, midi_pitch, message[2]])
+
     def release_midi_channel(self, note: int):
+        """Release midi note at respective engine."""
+
         for midi_channel in self._midi_channels:
             if midi_channel.note_in == note:
                 midi_channel.release()
 
     def pass_message(self, message: typing.List[int], message_type: int):
         if message_type == midiconstants.NOTE_ON:
-            active_cue = self._get_active_cue()
-            try:
-                data = active_cue[message[1]]
-            except KeyError:
-                data = None
-
-            if data is not None:
-                midi_pitch, pitch_bend, engine_id = data
-                engine = self._engines[engine_id]
-                midi_channel = self.get_midi_channel()
-                midi_channel.occupy(message[1], midi_pitch, engine._midi_out)
-                engine.send_message(
-                    [
-                        midiconstants.PITCH_BEND | midi_channel,
-                        pitch_bend & 0x7F,
-                        (pitch_bend >> 7) & 0x7F,
-                    ]
-                )
-                engine.send_message(
-                    [message_type | midi_channel, midi_pitch, message[2]]
-                )
+            # if midi note belongs to reserved midi notes for cue changes, update cue
+            if message[1] in (config.NEXT_CUE_MIDI_NOTE, config.PREVIOUS_CUE_MIDI_NOTE):
+                self.update_cue(message[1])
+            else:
+                self.occupy_midi_channel(message, message_type)
         elif message_type == midiconstants.NOTE_OFF:
             self.release_midi_channel(message[1])
+
+        # ignore all other midi messages
 
     def __call__(self, event, _: typing.Any = None):
         message, deltatime = event
