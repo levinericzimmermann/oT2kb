@@ -7,7 +7,7 @@ Keyboard patch for [ohne Titel (2)](https://github.com/levinericzimmermann/ot2).
 
 ### internal mapping from engine indices to engines
 
-This mapping is defined in "ot2kb/io/__init__.py".
+This mapping is defined in `ot2kb/io/__init__.py`.
 
 - 0: piano, -> for chords
 - 1: tremolo, -> for tremolo AND right hand cengkok
