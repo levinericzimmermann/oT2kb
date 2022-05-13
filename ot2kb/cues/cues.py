@@ -3,6 +3,7 @@ import json
 import typing
 
 import frozendict
+import natsort
 
 from ot2kb import config
 
@@ -24,7 +25,7 @@ def _initialise_cue(path: str) -> Cue:
 
 def initialise_cues() -> typing.Tuple[Cue, ...]:
     cues = []
-    for path in os.listdir(config.CUES_PATH):
+    for path in natsort.natsorted(os.listdir(config.CUES_PATH)):
         cue = _initialise_cue(f"{config.CUES_PATH}/{path}")
         cues.append(cue)
     return tuple(cues)

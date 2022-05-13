@@ -11,14 +11,16 @@ from ot2kb import config
 
 
 class MidiChannel(int):
-    def __init__(self, value: int):
+    def __init__(self, nth_channel: int):
         super().__init__()
+        self._nth_channel = nth_channel
         self._is_busy = False
         self._note_in = None
         self._note_out = None
         self._midi_out = None
         self._start_time = time.time()
         self._occupation_time = 0
+        self._release_time = 0
 
     @property
     def is_busy(self) -> bool:
@@ -27,6 +29,10 @@ class MidiChannel(int):
     @property
     def occupation_time(self) -> int:
         return self._occupation_time
+
+    @property
+    def release_time(self) -> int:
+        return self._release_time
 
     @property
     def note_in(self) -> typing.Optional[int]:
@@ -40,6 +46,7 @@ class MidiChannel(int):
         self._is_busy = True
         self._occupation_time = time.time() - self._start_time
         self._midi_out = midi_out
+        self._release_time = 0
 
     def release(self):
         if self._note_in:
@@ -50,6 +57,7 @@ class MidiChannel(int):
         self._note_out = None
         self._is_busy = False
         self._occupation_time = 0
+        self._release_time = time.time() - self._start_time
         self._midi_out = None
 
 
@@ -93,7 +101,7 @@ class MidiInputHandler(object):
         if message_type in (midiconstants.NOTE_ON, midiconstants.NOTE_OFF):
             formatted_message += "pitch: {}, vel: {}".format(*message[1:])
         else:
-            formatted_message += "{}, {}".format(*message[1:])
+            formatted_message += ",".join(map(str, message[1:]))
         self._window[config.MIDI_RECEIVE_KEY].update(formatted_message)
 
     def update_cue(self, midi_note: int):
@@ -113,7 +121,22 @@ class MidiInputHandler(object):
         spin.update(new_value)
 
     def get_midi_channel(self) -> int:
-        return min(self._midi_channels, key=lambda channel: channel.occupation_time)
+        occupation_times = tuple(
+            map(lambda channel: channel.occupation_time, self._midi_channels)
+        )
+        minimal_occupation_time = min(occupation_times)
+        # All channels are occupied: release the channel which has been occupied
+        # the longest.
+        if minimal_occupation_time > 0:
+            self._midi_channels[occupation_times.index(minimal_occupation_time)]
+        # There a one ore more than one free channels.
+        # Take the free channel which has been released the longest.
+        else:
+            filtered_midi_channels = filter(
+                lambda channel: channel.occupation_time == minimal_occupation_time,
+                self._midi_channels,
+            )
+            return min(filtered_midi_channels, key=lambda channel: channel.release_time)
 
     def occupy_midi_channel(self, message: typing.List[int], message_type: int):
         """Send midi message to engine."""
@@ -129,7 +152,7 @@ class MidiInputHandler(object):
             midi_pitch, pitch_bend, engine_id = data
             engine = self._engines[engine_id]
             midi_channel = self.get_midi_channel()
-            midi_channel.occupy(message[1], midi_pitch, engine._midi_out)
+            midi_channel.occupy(message[1], midi_pitch, engine.midi_out)
             engine.send_message(
                 [
                     midiconstants.PITCH_BEND | midi_channel,

@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+# script for compiling Faust source files to binary files
+
+# render engines
+for x in src/*.dsp
+do
+    faust2jackconsole -nvoices 16 -midi $x;
+    mv ${x%.*} bin/
+done

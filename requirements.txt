@@ -1,4 +1,5 @@
 frozendict==2.0.6
+natsort==5.5.0
 PySimpleGUI==4.46.0
 python-rtmidi==1.4.9
 

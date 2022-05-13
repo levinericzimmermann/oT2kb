@@ -1,0 +1,291 @@
+<!DOCTYPE patchbay>
+<patchbay version="0.9.1" name="ot2kb-">
+ <output-sockets>
+  <socket type="jack-audio" exclusive="off" client="system" name="system">
+   <plug>capture_1</plug>
+   <plug>capture_2</plug>
+   <plug>capture_3</plug>
+   <plug>capture_4</plug>
+   <plug>capture_5</plug>
+   <plug>capture_6</plug>
+   <plug>monitor_1</plug>
+   <plug>monitor_2</plug>
+   <plug>monitor_3</plug>
+   <plug>monitor_4</plug>
+   <plug>monitor_5</plug>
+   <plug>monitor_6</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" client="PulseAudio\ JACK\ Sink" name="PulseAudio JACK Sink">
+   <plug>front\-left</plug>
+   <plug>front\-right</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" client="tremolo" name="tremolo">
+   <plug>out_0</plug>
+   <plug>out_1</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" client="Pianoteq" name="Pianoteq">
+   <plug>out_1</plug>
+   <plug>out_2</plug>
+   <plug>out_3</plug>
+   <plug>out_4</plug>
+   <plug>out_5</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" client="Pianoteq\-01" name="Pianoteq-01">
+   <plug>out_1</plug>
+   <plug>out_2</plug>
+   <plug>out_3</plug>
+   <plug>out_4</plug>
+   <plug>out_5</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" client="multiguitar" name="multiguitar">
+   <plug>out_0</plug>
+   <plug>out_1</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" client="sweetsynth" name="sweetsynth">
+   <plug>out_0</plug>
+   <plug>out_1</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="system" name="system">
+   <plug>midi_capture_1</plug>
+   <plug>midi_capture_2</plug>
+   <plug>midi_capture_3</plug>
+   <plug>midi_capture_4</plug>
+   <plug>midi_capture_5</plug>
+   <plug>midi_capture_6</plug>
+   <plug>midi_capture_7</plug>
+   <plug>midi_capture_8</plug>
+   <plug>midi_capture_9</plug>
+   <plug>midi_capture_10</plug>
+   <plug>midi_capture_11</plug>
+   <plug>midi_capture_12</plug>
+   <plug>midi_capture_13</plug>
+   <plug>midi_capture_14</plug>
+   <plug>midi_capture_15</plug>
+   <plug>midi_capture_16</plug>
+   <plug>midi_capture_17</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="a2j" name="a2j">
+   <plug>Midi\ Through\ \[14\]\ \(capture\)\:\ Midi\ Through\ Port\-0</plug>
+   <plug>Midi\ Through\ \[14\]\ \(capture\)\:\ Midi\ Through\ Port\-1</plug>
+   <plug>Midi\ Through\ \[14\]\ \(capture\)\:\ Midi\ Through\ Port\-2</plug>
+   <plug>Midi\ Through\ \[14\]\ \(capture\)\:\ Midi\ Through\ Port\-3</plug>
+   <plug>Midi\ Through\ \[14\]\ \(capture\)\:\ Midi\ Through\ Port\-4</plug>
+   <plug>Midi\ Through\ \[14\]\ \(capture\)\:\ Midi\ Through\ Port\-5</plug>
+   <plug>Midi\ Through\ \[14\]\ \(capture\)\:\ Midi\ Through\ Port\-6</plug>
+   <plug>Midi\ Through\ \[14\]\ \(capture\)\:\ Midi\ Through\ Port\-7</plug>
+   <plug>Midi\ Through\ \[14\]\ \(capture\)\:\ Midi\ Through\ Port\-8</plug>
+   <plug>Midi\ Through\ \[14\]\ \(capture\)\:\ Midi\ Through\ Port\-9</plug>
+   <plug>Midi\ Through\ \[14\]\ \(capture\)\:\ Midi\ Through\ Port\-10</plug>
+   <plug>Midi\ Through\ \[14\]\ \(capture\)\:\ Midi\ Through\ Port\-11</plug>
+   <plug>Midi\ Through\ \[14\]\ \(capture\)\:\ Midi\ Through\ Port\-12</plug>
+   <plug>Midi\ Through\ \[14\]\ \(capture\)\:\ Midi\ Through\ Port\-13</plug>
+   <plug>Midi\ Through\ \[14\]\ \(capture\)\:\ Midi\ Through\ Port\-14</plug>
+   <plug>Midi\ Through\ \[14\]\ \(capture\)\:\ Midi\ Through\ Port\-15</plug>
+   <plug>Komplete\ Audio\ 6\ \[20\]\ \(capture\)\:\ Komplete\ Audio\ 6\ MIDI\ 1</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="RtMidiOut\ Client" name="RtMidiOut Client">
+   <plug>a2j\:Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-0</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="RtMidiOut\ Client\-01" name="RtMidiOut Client-01">
+   <plug>a2j\:Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-1</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="tremolo" name="tremolo">
+   <plug>midi_out_1</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="RtMidiOut\ Client\-02" name="RtMidiOut Client-02">
+   <plug>tremolo\:midi_in_1</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="multiguitar" name="multiguitar">
+   <plug>midi_out_1</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="RtMidiOut\ Client\-03" name="RtMidiOut Client-03">
+   <plug>multiguitar\:midi_in_1</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="RtMidiOut\ Client\-04" name="RtMidiOut Client-04">
+   <plug>sweetsynth\:midi_in_1</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="sweetsynth" name="sweetsynth">
+   <plug>midi_out_1</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="a2j" name="a2j 2">
+   <plug>Komplete\ Audio\ 6\ \[20\]\ \(capture\)\:\ Komplete\ Audio\ 6\ MIDI\ 1</plug>
+  </socket>
+  <socket type="alsa-midi" exclusive="off" client="Midi\ Through" name="Midi Through">
+   <plug>Midi\ Through\ Port\-0</plug>
+   <plug>Midi\ Through\ Port\-1</plug>
+   <plug>Midi\ Through\ Port\-2</plug>
+   <plug>Midi\ Through\ Port\-3</plug>
+   <plug>Midi\ Through\ Port\-4</plug>
+   <plug>Midi\ Through\ Port\-5</plug>
+   <plug>Midi\ Through\ Port\-6</plug>
+   <plug>Midi\ Through\ Port\-7</plug>
+   <plug>Midi\ Through\ Port\-8</plug>
+   <plug>Midi\ Through\ Port\-9</plug>
+   <plug>Midi\ Through\ Port\-10</plug>
+   <plug>Midi\ Through\ Port\-11</plug>
+   <plug>Midi\ Through\ Port\-12</plug>
+   <plug>Midi\ Through\ Port\-13</plug>
+   <plug>Midi\ Through\ Port\-14</plug>
+   <plug>Midi\ Through\ Port\-15</plug>
+  </socket>
+  <socket type="alsa-midi" exclusive="off" client="Komplete\ Audio\ 6" name="Komplete Audio 6">
+   <plug>Komplete\ Audio\ 6\ MIDI\ 1</plug>
+  </socket>
+  <socket type="alsa-midi" exclusive="off" client="Midi\ Through" name="Midi Through 2">
+   <plug>Midi\ Through\ Port\-0</plug>
+   <plug>Midi\ Through\ Port\-0</plug>
+  </socket>
+ </output-sockets>
+ <input-sockets>
+  <socket type="jack-audio" exclusive="off" client="system" name="system">
+   <plug>playback_1</plug>
+   <plug>playback_2</plug>
+   <plug>playback_3</plug>
+   <plug>playback_4</plug>
+   <plug>playback_5</plug>
+   <plug>playback_6</plug>
+  </socket>
+  <socket type="jack-audio" exclusive="off" client="PulseAudio\ JACK\ Source" name="PulseAudio JACK Source">
+   <plug>front\-left</plug>
+   <plug>front\-right</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="system" name="system">
+   <plug>midi_playback_1</plug>
+   <plug>midi_playback_2</plug>
+   <plug>midi_playback_3</plug>
+   <plug>midi_playback_4</plug>
+   <plug>midi_playback_5</plug>
+   <plug>midi_playback_6</plug>
+   <plug>midi_playback_7</plug>
+   <plug>midi_playback_8</plug>
+   <plug>midi_playback_9</plug>
+   <plug>midi_playback_10</plug>
+   <plug>midi_playback_11</plug>
+   <plug>midi_playback_12</plug>
+   <plug>midi_playback_13</plug>
+   <plug>midi_playback_14</plug>
+   <plug>midi_playback_15</plug>
+   <plug>midi_playback_16</plug>
+   <plug>midi_playback_17</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="a2j" name="a2j">
+   <plug>Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-0</plug>
+   <plug>Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-1</plug>
+   <plug>Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-2</plug>
+   <plug>Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-3</plug>
+   <plug>Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-4</plug>
+   <plug>Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-5</plug>
+   <plug>Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-6</plug>
+   <plug>Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-7</plug>
+   <plug>Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-8</plug>
+   <plug>Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-9</plug>
+   <plug>Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-10</plug>
+   <plug>Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-11</plug>
+   <plug>Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-12</plug>
+   <plug>Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-13</plug>
+   <plug>Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-14</plug>
+   <plug>Midi\ Through\ \[14\]\ \(playback\)\:\ Midi\ Through\ Port\-15</plug>
+   <plug>Komplete\ Audio\ 6\ \[20\]\ \(playback\)\:\ Komplete\ Audio\ 6\ MIDI\ 1</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="tremolo" name="tremolo">
+   <plug>midi_in_1</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="Pianoteq" name="Pianoteq">
+   <plug>midi_in</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="Pianoteq\-01" name="Pianoteq-01">
+   <plug>midi_in</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="multiguitar" name="multiguitar">
+   <plug>midi_in_1</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="sweetsynth" name="sweetsynth">
+   <plug>midi_in_1</plug>
+  </socket>
+  <socket type="jack-midi" exclusive="off" client="RtMidiIn\ Client" name="RtMidiIn Client">
+   <plug>Virtual\ MIDI\ input</plug>
+  </socket>
+  <socket type="alsa-midi" exclusive="off" client="Midi\ Through" name="Midi Through">
+   <plug>Midi\ Through\ Port\-0</plug>
+   <plug>Midi\ Through\ Port\-1</plug>
+   <plug>Midi\ Through\ Port\-2</plug>
+   <plug>Midi\ Through\ Port\-3</plug>
+   <plug>Midi\ Through\ Port\-4</plug>
+   <plug>Midi\ Through\ Port\-5</plug>
+   <plug>Midi\ Through\ Port\-6</plug>
+   <plug>Midi\ Through\ Port\-7</plug>
+   <plug>Midi\ Through\ Port\-8</plug>
+   <plug>Midi\ Through\ Port\-9</plug>
+   <plug>Midi\ Through\ Port\-10</plug>
+   <plug>Midi\ Through\ Port\-11</plug>
+   <plug>Midi\ Through\ Port\-12</plug>
+   <plug>Midi\ Through\ Port\-13</plug>
+   <plug>Midi\ Through\ Port\-14</plug>
+   <plug>Midi\ Through\ Port\-15</plug>
+  </socket>
+  <socket type="alsa-midi" exclusive="off" client="Komplete\ Audio\ 6" name="Komplete Audio 6">
+   <plug>Komplete\ Audio\ 6\ MIDI\ 1</plug>
+  </socket>
+  <socket type="alsa-midi" exclusive="off" client="jack_midi" name="jack_midi">
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+  </socket>
+  <socket type="alsa-midi" exclusive="off" client="Pianoteq" name="Pianoteq">
+   <plug>Midi\ Through\ Port\-0</plug>
+   <plug>Midi\ Through\ Port\-0</plug>
+  </socket>
+  <socket type="alsa-midi" exclusive="off" client="a2jmidid" name="a2jmidid">
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+   <plug>port</plug>
+  </socket>
+ </input-sockets>
+ <slots/>
+ <cables>
+  <cable input="PulseAudio JACK Source" type="jack-audio" output="system"/>
+  <cable input="system" type="jack-audio" output="tremolo"/>
+  <cable input="system" type="jack-audio" output="Pianoteq"/>
+  <cable input="system" type="jack-audio" output="Pianoteq-01"/>
+  <cable input="system" type="jack-audio" output="multiguitar"/>
+  <cable input="system" type="jack-audio" output="sweetsynth"/>
+  <cable input="Pianoteq" type="jack-midi" output="RtMidiOut Client"/>
+  <cable input="Pianoteq-01" type="jack-midi" output="RtMidiOut Client-01"/>
+  <cable input="tremolo" type="jack-midi" output="RtMidiOut Client-02"/>
+  <cable input="multiguitar" type="jack-midi" output="RtMidiOut Client-03"/>
+  <cable input="sweetsynth" type="jack-midi" output="RtMidiOut Client-04"/>
+  <cable input="RtMidiIn Client" type="jack-midi" output="a2j 2"/>
+  <cable input="jack_midi" type="alsa-midi" output="Midi Through"/>
+  <cable input="a2jmidid" type="alsa-midi" output="Midi Through"/>
+  <cable input="jack_midi" type="alsa-midi" output="Komplete Audio 6"/>
+  <cable input="a2jmidid" type="alsa-midi" output="Komplete Audio 6"/>
+  <cable input="Pianoteq" type="alsa-midi" output="Midi Through 2"/>
+ </cables>
+</patchbay>
+
