@@ -18,11 +18,11 @@ setuptools.setup(
     ],
     setup_requires=[],
     install_requires=[
-        "mutwo>=0.12.0, <1.0.0",
-        "python-rtmidi>=1.4.9",
-        "PySimpleGUI>=4.46.0",
-        "frozendict>=2.0.6",
-        "natsort>=5.5.0",
+        "mutwo==0.12.0",
+        "python-rtmidi==1.4.9",
+        "PySimpleGUI==4.46.0",
+        "frozendict==2.0.6",
+        "natsort==5.5.0",
     ],
     python_requires=">=3.7, <4",
 )
